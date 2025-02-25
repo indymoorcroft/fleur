@@ -17,6 +17,13 @@ const ibmPlexSans = localFont({
   ],
 });
 
+const bebasNeue = localFont({
+  src: [
+    { path: "./fonts/BebasNeue-Regular.ttf", weight: "400", style: "normal" },
+  ],
+  variable: "--bebas-neue",
+});
+
 const rundeckSmooth = localFont({
   src: [{ path: "/fonts/Rundeck-Smooth.ttf", weight: "400", style: "normal" }],
   variable: "--rundeck-smooth",
@@ -32,7 +39,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
   return (
     <html lang="en">
       <body
-        className={`${ibmPlexSans.className} ${rundeckSmooth.variable} antialiased`}
+        className={`${ibmPlexSans.className} ${bebasNeue.variable} ${rundeckSmooth.variable} antialiased`}
       >
         {children}
       </body>
