@@ -12,6 +12,7 @@ export default {
       fontFamily: {
         "ibm-plex-sans": ["IBM Plex Sans", "sans-serif"],
         "rundeck-smooth": ["var(--rundeck-smooth)"],
+        "bebas-neue": ["var(--bebas-neue)"],
       },
       colors: {
         background: "hsl(var(--background))",
