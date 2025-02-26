@@ -1,3 +1,17 @@
+export const FIELD_NAMES = {
+  firstName: "First name",
+  lastName: "Last name",
+  email: "Email",
+  password: "Password",
+};
+
+export const FIELD_TYPES = {
+  firstName: "text",
+  lastName: "text",
+  email: "email",
+  password: "password",
+};
+
 export const sampleEvents = [
   {
     id: 1,
