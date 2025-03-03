@@ -1,6 +1,6 @@
-import formatDate from "@/utils";
 import Image from "next/image";
 import { Button } from "./ui/button";
+import { formatDate } from "@/lib/utils";
 
 const FeaturedEvent = ({
   title,
