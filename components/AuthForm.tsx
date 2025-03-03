@@ -14,7 +14,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -23,12 +22,14 @@ import {
 import { Input } from "./ui/input";
 import Link from "next/link";
 import { FIELD_NAMES, FIELD_TYPES } from "@/constants";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 interface Props<T extends FieldValues> {
   type: "SIGN_IN" | "SIGN_UP";
   schema: ZodType<T>;
   defaultValues: T;
-  onSubmit?: (data: T) => Promise<{ success: boolean; error?: string }>; //remove '?' once onSubmit functionality added
+  onSubmit: (data: T) => Promise<{ success: boolean; error?: string }>;
 }
 
 const AuthForm = <T extends FieldValues>({
@@ -37,6 +38,7 @@ const AuthForm = <T extends FieldValues>({
   defaultValues,
   onSubmit,
 }: Props<T>) => {
+  const router = useRouter();
   const isSignIn = type === "SIGN_IN";
 
   const form: UseFormReturn<T> = useForm({
@@ -44,7 +46,17 @@ const AuthForm = <T extends FieldValues>({
     defaultValues: defaultValues as DefaultValues<T>,
   });
 
-  const handleSubmit: SubmitHandler<T> = async (data) => {};
+  const handleSubmit: SubmitHandler<T> = async (data) => {
+    const result = await onSubmit(data);
+
+    if (result.success) {
+      toast(`Successful ${isSignIn ? "sign in" : "sign up"}`);
+
+      router.push("/");
+    } else {
+      toast(`Error ${isSignIn ? "signing in" : "signing up"}`);
+    }
+  };
 
   return (
     <div className="flex flex-col gap-4">

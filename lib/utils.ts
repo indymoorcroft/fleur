@@ -27,3 +27,7 @@ export const formatDate = (dateString: string) => {
 
   return `${day}${getOrdinal(day)} ${month} ${year}`;
 };
+
+export const getInitial = (firstName: string): string => {
+  return firstName[0].toUpperCase();
+};
