@@ -1,6 +1,7 @@
 "use client";
 
 import AuthForm from "@/components/AuthForm";
+import { signUp } from "@/lib/actions/auth";
 import { signUpSchema } from "@/lib/validation";
 
 const SignUp = () => (
@@ -8,7 +9,7 @@ const SignUp = () => (
     type="SIGN_UP"
     schema={signUpSchema}
     defaultValues={{ firstName: "", lastName: "", email: "", password: "" }}
-    // onSubmit={() => {}}
+    onSubmit={signUp}
   />
 );
 
