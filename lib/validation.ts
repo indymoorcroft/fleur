@@ -11,3 +11,15 @@ export const signInSchema = z.object({
   email: z.string().email(),
   password: z.string().min(8),
 });
+
+export const eventSchema = z.object({
+  title: z.string().trim().min(2).max(100),
+  venue: z.string().trim().min(2).max(100),
+  location: z.string().trim().min(2).max(100),
+  promoters: z.string().nonempty(),
+  genre: z.string().trim().min(2).max(100),
+  date: z.date(),
+  description: z.string().trim().min(10).max(1000),
+  availableTickets: z.coerce.number().int().positive().lte(100000),
+  imageUrl: z.string().nonempty(),
+});
