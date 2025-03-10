@@ -1,5 +1,6 @@
 import {
   date,
+  integer,
   pgEnum,
   pgTable,
   text,
@@ -28,5 +29,19 @@ export const users = pgTable("users", {
   status: STATUS_ENUM("status").default("PENDING"),
   role: ROLE_ENUM("role").default("USER"),
   lastActivityDate: date("last_activity_date").defaultNow(),
+  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow(),
+});
+
+export const events = pgTable("events", {
+  id: uuid("id").notNull().primaryKey().defaultRandom().unique(),
+  title: varchar("title", { length: 255 }).notNull(),
+  venue: text("venue").notNull(),
+  location: text("location").notNull(),
+  promoters: text("promoters").notNull(),
+  genre: text("genre").notNull(),
+  date: date(),
+  description: text("description").notNull(),
+  availableTickets: integer("available_tickets").notNull().default(0),
+  imageUrl: text("image_url").notNull(),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow(),
 });

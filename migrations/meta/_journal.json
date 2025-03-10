@@ -8,6 +8,20 @@
       "when": 1741011264230,
       "tag": "0000_cold_jackpot",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1741606181175,
+      "tag": "0001_gigantic_sinister_six",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1741606533871,
+      "tag": "0002_unknown_martin_li",
+      "breakpoints": true
     }
   ]
 }
