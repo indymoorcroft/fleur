@@ -17,3 +17,15 @@ interface AuthCredentials {
   email: string;
   password: string;
 }
+
+interface EventParams {
+  title: string;
+  venue: string;
+  location: string;
+  promoters: string;
+  genre: string;
+  date: Date;
+  description: string;
+  availableTickets: number;
+  imageUrl: string;
+}

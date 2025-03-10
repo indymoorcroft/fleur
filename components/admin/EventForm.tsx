@@ -22,6 +22,8 @@ import { Calendar } from "../ui/calendar";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import ImageUpload from "../ImageUpload";
+import { createEvent } from "@/lib/admin/actions/event";
+import { toast } from "sonner";
 
 interface Props extends Partial<Event> {
   type?: "create" | "update";
@@ -45,7 +47,17 @@ const EventForm = ({ type, ...event }: Props) => {
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof eventSchema>) => {};
+  const onSubmit = async (values: z.infer<typeof eventSchema>) => {
+    const result = await createEvent(values);
+
+    if (result.success) {
+      toast("Event created successfully");
+
+      router.push(`/admin/events/${result.data.id}`);
+    } else {
+      toast(result.message);
+    }
+  };
 
   return (
     <Form {...form}>
@@ -242,7 +254,12 @@ const EventForm = ({ type, ...event }: Props) => {
                 Image
               </FormLabel>
               <FormControl>
-                <ImageUpload onFileChange={field.onChange} />
+                <ImageUpload
+                  accept="image/*"
+                  folder="events/covers"
+                  onFileChange={field.onChange}
+                  value={field.value}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>

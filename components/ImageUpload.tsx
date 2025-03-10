@@ -32,13 +32,19 @@ const authenticator = async () => {
   }
 };
 
-const ImageUpload = ({
-  onFileChange,
-}: {
+interface Props {
+  accept: string;
+  folder: string;
   onFileChange: (filePath: string) => void;
-}) => {
+  value?: string;
+}
+
+const ImageUpload = ({ accept, folder, onFileChange, value }: Props) => {
   const ikUploadRef = useRef(null);
-  const [file, setFile] = useState<{ filePath: string } | null>(null);
+  const [file, setFile] = useState<{ filePath: string | null }>({
+    filePath: value ?? null,
+  });
+  const [progress, setProgress] = useState(0);
 
   const onError = (error: any) => {
     console.log(error);
@@ -51,6 +57,14 @@ const ImageUpload = ({
     toast("Image uploaded successfully");
   };
 
+  const onValidate = (file: File) => {
+    if (file.size > 20 * 1024 * 1024) {
+      toast(`File size too large`);
+      return false;
+    }
+    return true;
+  };
+
   return (
     <ImageKitProvider
       publicKey={publicKey}
@@ -58,11 +72,20 @@ const ImageUpload = ({
       authenticator={authenticator}
     >
       <IKUpload
-        className="hidden"
         ref={ikUploadRef}
         onError={onError}
         onSuccess={onSuccess}
-        fileName="test-upload.png"
+        useUniqueFileName={true}
+        validateFile={onValidate}
+        onUploadStart={() => setProgress(0)}
+        onUploadProgress={({ loaded, total }) => {
+          const percent = Math.round((loaded / total) * 100);
+
+          setProgress(percent);
+        }}
+        folder={folder}
+        accept={accept}
+        className="hidden"
       />
 
       <button
@@ -87,6 +110,17 @@ const ImageUpload = ({
 
         {file && <p className="mt-1 text-center text-xs">{file.filePath}</p>}
       </button>
+
+      {progress > 0 && progress !== 100 && (
+        <div className="w-full rounded-full bg-green-200">
+          <div
+            className="rounded-full bg-green-800 p-0.5 text-center font-bebas-neue text-[8px] font-bold leading-none text-light-100"
+            style={{ width: `${progress}%` }}
+          >
+            {progress}%
+          </div>
+        </div>
+      )}
 
       {file && (
         <IKImage
