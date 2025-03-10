@@ -1,15 +1,21 @@
-import Image from "next/image";
+"use client";
+
+import config from "@/lib/config";
+import { IKImage } from "imagekitio-next";
 import Link from "next/link";
 
 const EventCard = ({ id, title, genre, imageUrl }: Listing) => (
   <li>
     <Link href={`/events/${id}`}>
-      <Image
-        src={imageUrl}
-        alt="event image"
+      <IKImage
+        path={imageUrl}
+        urlEndpoint={config.env.imagekit.urlEndpoint}
+        alt="Event cover"
         width={125}
         height={125}
-        className="rounded-sm"
+        className="rounded-sm object-fill"
+        loading="lazy"
+        lqip={{ active: true }}
       />
 
       <div className="mt-4 xs:max-w-40 max-w-28">

@@ -1,6 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import { Button } from "./ui/button";
 import { formatDate } from "@/lib/utils";
+import { IKImage } from "imagekitio-next";
+import config from "@/lib/config";
 
 const FeaturedEvent = ({
   title,
@@ -58,12 +62,15 @@ const FeaturedEvent = ({
 
       <div className="relative flex flex-1 justify-center">
         <div className="relative">
-          <Image
-            src={imageUrl}
-            alt="event image"
-            width={400}
-            height={400}
+          <IKImage
+            path={imageUrl}
+            urlEndpoint={config.env.imagekit.urlEndpoint}
+            alt="Event cover"
+            width={500}
+            height={500}
             className="rounded-sm object-fill"
+            loading="lazy"
+            lqip={{ active: true }}
           />
         </div>
       </div>
