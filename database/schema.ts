@@ -45,3 +45,18 @@ export const events = pgTable("events", {
   imageUrl: text("image_url").notNull(),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow(),
 });
+
+export const userEventRecords = pgTable("user_event_records", {
+  id: uuid("id").notNull().primaryKey().defaultRandom().unique(),
+  userId: uuid("user_id")
+    .references(() => users.id)
+    .notNull(),
+  eventId: uuid("event_id")
+    .references(() => events.id)
+    .notNull(),
+  signUpDate: timestamp("sign_up_date", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+  status: ATTENDING_STATUS_ENUM("status").default("ATTENDING").notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow(),
+});

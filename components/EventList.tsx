@@ -7,8 +7,6 @@ interface Props {
 }
 
 const EventList = ({ title, events, containerClassName }: Props) => {
-  // if (events.length < 2) return;
-
   return (
     <section className={containerClassName}>
       <h2 className="font-bebas-neue text-4xl text-dark-600">{title}</h2>

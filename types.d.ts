@@ -30,3 +30,8 @@ interface EventParams {
   availableTickets: number;
   imageUrl: string;
 }
+
+interface EventSignUpParams {
+  eventId: string;
+  userId: string;
+}
