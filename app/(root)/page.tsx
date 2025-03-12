@@ -16,7 +16,11 @@ const Home = async () => {
 
   return (
     <>
-      <FeaturedEvent {...latestEvents[0]} />
+      <FeaturedEvent
+        {...latestEvents[0]}
+        userId={session?.user?.id as string}
+        homepage={true}
+      />
 
       <EventList
         title="Latest Events"

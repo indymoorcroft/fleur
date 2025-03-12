@@ -5,8 +5,16 @@ import { Button } from "./ui/button";
 import { formatDate } from "@/lib/utils";
 import { IKImage } from "imagekitio-next";
 import config from "@/lib/config";
+import { useRouter } from "next/navigation";
+import EventSignUp from "./EventSignUp";
+
+interface Props extends Listing {
+  userId: string;
+  homepage: boolean;
+}
 
 const FeaturedEvent = ({
+  id,
   title,
   venue,
   location,
@@ -14,8 +22,18 @@ const FeaturedEvent = ({
   genre,
   date,
   description,
+  availableTickets,
   imageUrl,
-}: Listing) => {
+  userId,
+  homepage,
+}: Props) => {
+  const router = useRouter();
+
+  const tickets = {
+    available: availableTickets > 0,
+    message: "Event not available",
+  };
+
   return (
     <section className="flex flex-col-reverse items-center gap-12 sm:gap-32 xl:flex-row xl:gap-8">
       <div className="flex flex-1 flex-col gap-5">
@@ -55,9 +73,16 @@ const FeaturedEvent = ({
 
         <p className="mt-2 text-justify text-xl text-dark-600">{description}</p>
 
-        <Button className="mt-4 min-h-14 w-fit bg-primary text-dark-950 hover:bg-primary/90 max-md:w-full">
-          <p className="font-bebas-neue text-xl text-dark-100">tickets</p>
-        </Button>
+        {homepage ? (
+          <Button
+            className="mt-4 min-h-14 w-fit bg-primary text-dark-950 hover:bg-primary/90 max-md:w-full"
+            onClick={() => router.push(`events/${id}`)}
+          >
+            <p className="font-bebas-neue text-xl text-dark-100">learn more</p>
+          </Button>
+        ) : (
+          <EventSignUp eventId={id} userId={userId} tickets={tickets} />
+        )}
       </div>
 
       <div className="relative flex flex-1 justify-center">
