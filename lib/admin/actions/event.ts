@@ -9,7 +9,8 @@ export const createEvent = async (params: EventParams) => {
       .insert(events)
       .values({
         ...params,
-        date: params.date.toDateString(),
+        startDateTime: params.startDateTime.toString(),
+        endDateTime: params.endDateTime.toString(),
       })
       .returning();
 

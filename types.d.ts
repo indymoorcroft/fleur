@@ -5,7 +5,8 @@ interface Listing {
   location: string;
   promoters: string;
   genre: string;
-  date: string;
+  startDateTime: string;
+  endDateTime: string;
   description: string;
   availableTickets: number;
   imageUrl: string;
@@ -25,7 +26,8 @@ interface EventParams {
   location: string;
   promoters: string;
   genre: string;
-  date: Date;
+  startDateTime: Date;
+  endDateTime: Date;
   description: string;
   availableTickets: number;
   imageUrl: string;
