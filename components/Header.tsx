@@ -23,7 +23,6 @@ const Header = ({ session }: { session: Session }) => {
             className={cn(
               "text-base cursor-pointer capitalize",
               pathname === "/events" ? "text-black" : "text-light-500"
-              //changes the colour of the link text
             )}
           >
             Events

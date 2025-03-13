@@ -1,7 +1,7 @@
 "use server";
 
 import { db } from "@/database/drizzle";
-import { events, userEventRecords, users } from "@/database/schema";
+import { events, userEventRecords } from "@/database/schema";
 import { and, eq } from "drizzle-orm";
 
 export const eventSignUp = async (params: EventSignUpParams) => {
