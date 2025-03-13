@@ -18,7 +18,12 @@ export const eventSchema = z.object({
   location: z.string().trim().min(2).max(100),
   promoters: z.string().nonempty(),
   genre: z.string().trim().min(2).max(100),
-  date: z.date(),
+  startDateTime: z.date({
+    required_error: "A date and time is required.",
+  }),
+  endDateTime: z.date({
+    required_error: "A date and time is required.",
+  }),
   description: z.string().trim().min(10).max(1000),
   availableTickets: z.coerce.number().int().positive().lte(100000),
   imageUrl: z.string().nonempty(),

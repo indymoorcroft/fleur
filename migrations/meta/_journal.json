@@ -29,6 +29,41 @@
       "when": 1741707101208,
       "tag": "0003_dark_wiccan",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1741797252107,
+      "tag": "0004_equal_centennial",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1741797900464,
+      "tag": "0005_hard_micromacro",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1741798497226,
+      "tag": "0006_brief_chat",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1741798555333,
+      "tag": "0007_equal_reaper",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1741798572771,
+      "tag": "0008_absurd_harry_osborn",
+      "breakpoints": true
     }
   ]
 }

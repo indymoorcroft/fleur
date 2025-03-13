@@ -66,7 +66,7 @@ const EventSignUp = ({
 
   return (
     <Button
-      className="mt-4 min-h-14 w-fit bg-primary text-dark-950 hover:bg-primary/90 max-md:w-full"
+      className="mt-4 min-h-14 w-fit bg-primary text-dark-950 hover:bg-primary/90"
       onClick={handleEventSignUp}
       disabled={alterSignUp || !available}
     >

@@ -7,6 +7,7 @@ import { IKImage } from "imagekitio-next";
 import config from "@/lib/config";
 import { useRouter } from "next/navigation";
 import EventSignUp from "./EventSignUp";
+import CalendarLink from "./CalendarLink";
 
 interface Props extends Listing {
   userId: string;
@@ -20,7 +21,8 @@ const FeaturedEvent = ({
   location,
   promoters,
   genre,
-  date,
+  startDateTime,
+  endDateTime,
   description,
   availableTickets,
   imageUrl,
@@ -59,7 +61,7 @@ const FeaturedEvent = ({
           <p className="text-xl text-dark-600">
             date{" "}
             <span className="ml-2 font-semibold text-purple-800">
-              {formatDate(date)}
+              {formatDate(startDateTime)}
             </span>
           </p>
           <p className="text-xl text-dark-600">
@@ -81,7 +83,28 @@ const FeaturedEvent = ({
             <p className="font-bebas-neue text-xl text-dark-100">learn more</p>
           </Button>
         ) : (
-          <EventSignUp eventId={id} userId={userId} tickets={tickets} />
+          <section className="flex flex-row justify-between">
+            <div>
+              <EventSignUp eventId={id} userId={userId} tickets={tickets} />
+            </div>
+
+            <div>
+              <CalendarLink
+                title={title}
+                venue={venue}
+                location={location}
+                description={description}
+                startDateTime={startDateTime}
+                endDateTime={endDateTime}
+                id={""}
+                promoters={""}
+                genre={""}
+                availableTickets={0}
+                imageUrl={""}
+                createdAt={null}
+              />
+            </div>
+          </section>
         )}
       </div>
 
