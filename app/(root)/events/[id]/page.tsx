@@ -1,26 +1,20 @@
 import { auth } from "@/auth";
 import FeaturedEvent from "@/components/FeaturedEvent";
-import { db } from "@/database/drizzle";
-import { events } from "@/database/schema";
-import { eq } from "drizzle-orm";
+import { getEventById } from "@/lib/actions/event";
 import { redirect } from "next/navigation";
 
 const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const id = (await params).id;
   const session = await auth();
 
-  const [eventDetails] = await db
-    .select()
-    .from(events)
-    .where(eq(events.id, id))
-    .limit(1);
+  const { data } = await getEventById(id);
 
-  if (!eventDetails) redirect("/404");
+  if (!data) redirect("/404");
 
   return (
     <>
       <FeaturedEvent
-        {...eventDetails}
+        {...data[0]}
         userId={session?.user?.id as string}
         homepage={false}
       />

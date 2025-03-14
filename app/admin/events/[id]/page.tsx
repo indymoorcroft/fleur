@@ -1,8 +1,13 @@
 import EventForm from "@/components/admin/EventForm";
 import { Button } from "@/components/ui/button";
+import { getEventById } from "@/lib/actions/event";
 import Link from "next/link";
 
-const NewEvent = () => {
+const UpdateEvent = async ({ params }: { params: Promise<{ id: string }> }) => {
+  const id = (await params).id;
+
+  const { data } = await getEventById(id);
+
   return (
     <>
       <Button
@@ -13,10 +18,10 @@ const NewEvent = () => {
       </Button>
 
       <section className="w-full max-w-2xl">
-        <EventForm type="create" />
+        <EventForm type="update" event={data[0]} />
       </section>
     </>
   );
 };
 
-export default NewEvent;
+export default UpdateEvent;
