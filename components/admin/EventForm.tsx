@@ -22,31 +22,34 @@ import { Calendar } from "../ui/calendar";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import ImageUpload from "../ImageUpload";
-import { createEvent } from "@/lib/admin/actions/event";
+import { createEvent, updateEvent } from "@/lib/admin/actions/event";
 import { toast } from "sonner";
 import { ScrollArea, ScrollBar } from "../ui/scroll-area";
 import { CalendarIcon } from "@radix-ui/react-icons";
 
 interface Props extends Partial<Event> {
   type?: "create" | "update";
+  event?: Listing;
 }
 
-const EventForm = ({ type, ...event }: Props) => {
+const EventForm = ({ type, event }: Props) => {
   const router = useRouter();
 
   const form = useForm<z.infer<typeof eventSchema>>({
     resolver: zodResolver(eventSchema),
     defaultValues: {
-      title: "",
-      venue: "",
-      location: "",
-      promoters: "",
-      genre: "",
-      startDateTime: new Date(),
-      endDateTime: new Date(),
-      description: "",
-      availableTickets: 0,
-      imageUrl: "",
+      title: type === "update" && event ? event.title : "",
+      venue: type === "update" && event ? event.venue : "",
+      location: type === "update" && event ? event.location : "",
+      promoters: type === "update" && event ? event.promoters : "",
+      genre: type === "update" && event ? event.genre : "",
+      startDateTime:
+        type === "update" && event ? new Date(event.startDateTime) : new Date(),
+      endDateTime:
+        type === "update" && event ? new Date(event.endDateTime) : new Date(),
+      description: type === "update" && event ? event.description : "",
+      availableTickets: type === "update" && event ? event.availableTickets : 0,
+      imageUrl: type === "update" && event ? event.imageUrl : "",
     },
   });
 
@@ -107,21 +110,42 @@ const EventForm = ({ type, ...event }: Props) => {
     form.setValue("endDateTime", newDate);
   }
 
-  const onSubmit = async (values: z.infer<typeof eventSchema>) => {
+  const onSubmitCreate = async (values: z.infer<typeof eventSchema>) => {
     const result = await createEvent(values);
 
     if (result.success) {
       toast("Event created successfully");
 
-      router.push(`/admin/events/${result.data.id}`);
+      router.push(`/admin/events/`);
     } else {
       toast(result.message);
     }
   };
 
+  const onSubmitEdit = async (values: z.infer<typeof eventSchema>) => {
+    if (event) {
+      const result = await updateEvent(values, event.id);
+
+      if (result.success) {
+        toast("Event updated successfully");
+
+        router.push(`/admin/events/`);
+      } else {
+        toast(result.message);
+      }
+    }
+  };
+
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form
+        onSubmit={
+          type === "create"
+            ? form.handleSubmit(onSubmitCreate)
+            : form.handleSubmit(onSubmitEdit)
+        }
+        className="space-y-8"
+      >
         <FormField
           control={form.control}
           name={"title"}

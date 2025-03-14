@@ -2,7 +2,7 @@
 
 import { db } from "@/database/drizzle";
 import { events, userEventRecords } from "@/database/schema";
-import { and, eq } from "drizzle-orm";
+import { and, eq, desc } from "drizzle-orm";
 
 export const eventSignUp = async (params: EventSignUpParams) => {
   const { userId, eventId } = params;
@@ -80,6 +80,47 @@ export const removeSignUp = async (params: EventSignUpParams) => {
     return {
       success: false,
       error: "An error occurred",
+    };
+  }
+};
+
+export const getAllEvents = async () => {
+  try {
+    const allEvents = (await db
+      .select()
+      .from(events)
+      .orderBy(desc(events.createdAt))) as Listing[];
+
+    return {
+      success: true,
+      data: JSON.parse(JSON.stringify(allEvents)),
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      success: false,
+      message: "An error occured while fetching the events",
+    };
+  }
+};
+
+export const getEventById = async (id: string) => {
+  try {
+    const event = await db
+      .select()
+      .from(events)
+      .where(eq(events.id, id))
+      .limit(1);
+
+    return {
+      success: true,
+      data: JSON.parse(JSON.stringify(event)),
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      success: false,
+      message: "An error occured while fetching the event",
     };
   }
 };

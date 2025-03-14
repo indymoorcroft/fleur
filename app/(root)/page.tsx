@@ -1,30 +1,25 @@
 import { auth } from "@/auth";
 import EventList from "@/components/EventList";
 import FeaturedEvent from "@/components/FeaturedEvent";
-import { db } from "@/database/drizzle";
-import { events } from "@/database/schema";
-import { desc } from "drizzle-orm";
+
+import { getAllEvents } from "@/lib/actions/event";
 
 const Home = async () => {
   const session = await auth();
 
-  const latestEvents = (await db
-    .select()
-    .from(events)
-    .limit(8)
-    .orderBy(desc(events.createdAt))) as Listing[];
+  const { data } = await getAllEvents();
 
   return (
     <>
       <FeaturedEvent
-        {...latestEvents[0]}
+        {...data[0]}
         userId={session?.user?.id as string}
         homepage={true}
       />
 
       <EventList
         title="Latest Events"
-        events={latestEvents.slice(1)}
+        events={data.slice(1)}
         containerClassName="mt-28"
       />
     </>
