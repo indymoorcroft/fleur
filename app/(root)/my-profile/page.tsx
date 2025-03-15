@@ -1,10 +1,18 @@
-import { signOut } from "@/auth";
+import { auth, signOut } from "@/auth";
 import EventList from "@/components/EventList";
 import { Button } from "@/components/ui/button";
-import { sampleEvents } from "@/constants";
-import React from "react";
+import Link from "next/link";
+import { getUserEvents } from "@/lib/actions/event";
 
-const Profile = () => {
+const Profile = async () => {
+  const session = await auth();
+
+  const { data } = await getUserEvents(session?.user?.id);
+
+  const events = data.map((userEvent: any) => {
+    return userEvent.events;
+  });
+
   return (
     <>
       <form
@@ -18,7 +26,19 @@ const Profile = () => {
         <Button>Logout</Button>
       </form>
 
-      <EventList title="Your Events" events={sampleEvents} />
+      {!events ? (
+        <div className="w-full h-screen">
+          <p className="mb-6">
+            Events you have signed up for will appear here. You have not signed
+            up for any events.
+          </p>
+          <Button asChild>
+            <Link href="/events">Explore Events</Link>
+          </Button>
+        </div>
+      ) : (
+        <EventList title="Your Events" events={events} />
+      )}
     </>
   );
 };

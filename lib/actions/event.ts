@@ -124,3 +124,26 @@ export const getEventById = async (id: string) => {
     };
   }
 };
+
+export const getUserEvents = async (id: string | undefined) => {
+  try {
+    if (!id) throw new Error();
+
+    const userEvents = await db
+      .select()
+      .from(userEventRecords)
+      .where(eq(userEventRecords.userId, id))
+      .leftJoin(events, eq(events.id, userEventRecords.eventId));
+
+    return {
+      success: true,
+      data: JSON.parse(JSON.stringify(userEvents)),
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      success: false,
+      message: "An error occured while fetching the user events",
+    };
+  }
+};
