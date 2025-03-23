@@ -1,4 +1,4 @@
-import { columns } from "@/app/admin/events/columns";
+import { eventColumns } from "@/app/admin/events/eventColumns";
 import { DataTable } from "@/components/admin/DataTable";
 import { Button } from "@/components/ui/button";
 import { getAllEvents } from "@/lib/actions/event";
@@ -18,7 +18,7 @@ const AllEvents = async () => {
         </Button>
       </div>
       <div className="mt-7 w-full overflow-hidden">
-        <DataTable columns={columns} data={data} />
+        <DataTable columns={eventColumns} data={data} type="events" />
       </div>
     </section>
   );
