@@ -41,6 +41,7 @@ To run the project locally:
 1. **Clone the Repository**
 
    > git clone https://github.com/indymoorcroft/fleur.git
+
    > cd fleur
 
 2. **Instel Dependencies**
