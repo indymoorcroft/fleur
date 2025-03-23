@@ -65,7 +65,7 @@ const Sidebar = ({ session }: { session: Session }) => {
 
       <div className="user">
         <Avatar>
-          <AvatarFallback className="bg-amber-100">
+          <AvatarFallback className="bg-primary">
             {getInitial(session?.user?.name || "IN")}
           </AvatarFallback>
         </Avatar>
