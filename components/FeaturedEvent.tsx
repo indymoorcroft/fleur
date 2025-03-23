@@ -12,6 +12,7 @@ import CalendarLink from "./CalendarLink";
 interface Props extends Listing {
   userId: string;
   homepage: boolean;
+  signUpClicked: boolean;
 }
 
 const FeaturedEvent = ({
@@ -28,6 +29,7 @@ const FeaturedEvent = ({
   imageUrl,
   userId,
   homepage,
+  signUpClicked,
 }: Props) => {
   const router = useRouter();
 
@@ -85,7 +87,12 @@ const FeaturedEvent = ({
         ) : (
           <section className="flex flex-row justify-between">
             <div>
-              <EventSignUp eventId={id} userId={userId} tickets={tickets} />
+              <EventSignUp
+                eventId={id}
+                userId={userId}
+                tickets={tickets}
+                signUpClicked={signUpClicked}
+              />
             </div>
 
             <div>

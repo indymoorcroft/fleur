@@ -1,6 +1,6 @@
 import { auth } from "@/auth";
 import FeaturedEvent from "@/components/FeaturedEvent";
-import { getEventById } from "@/lib/actions/event";
+import { getEventById, isSignedUp } from "@/lib/actions/event";
 import { redirect } from "next/navigation";
 
 const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
@@ -9,7 +9,10 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
 
   const { data } = await getEventById(id);
 
+  if (!session || !session.user) redirect("/sign-in");
   if (!data) redirect("/404");
+
+  const checkSignedUp = await isSignedUp(session.user.id, id);
 
   return (
     <>
@@ -17,6 +20,7 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
         {...data[0]}
         userId={session?.user?.id as string}
         homepage={false}
+        signUpClicked={checkSignedUp}
       />
 
       <div className="lg:mt-36 mt-16 mb-20 flex flex-col gap-16 lg:flex-row">

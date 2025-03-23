@@ -2,9 +2,10 @@
 
 Hosted: https://fleur-indymoorcrofts-projects.vercel.app/
 
-**login as SUPER ADMIN:**
-username: 1234@test.com
-password: password
+login as SUPER ADMIN:
+
+- **username**: 1234@test.com
+- **password**: password
 
 Access to admin site is in the Footer.
 
