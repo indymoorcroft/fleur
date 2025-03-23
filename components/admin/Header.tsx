@@ -11,7 +11,7 @@ const Header = ({ session }: { session: Session }) => {
           Monitor all users and events here
         </p>
       </div>
-      <p>Search</p>
+      {/* <p>Search</p> */}
     </header>
   );
 };

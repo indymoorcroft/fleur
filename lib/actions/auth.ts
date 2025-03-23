@@ -60,3 +60,14 @@ export const signUp = async (params: AuthCredentials) => {
     return { success: false, error: "Sign up error" };
   }
 };
+
+export const checkIsAdmin = async (id: string) => {
+  return await db
+    .select({ isAdmin: users.role })
+    .from(users)
+    .where(eq(users.id, id))
+    .limit(1)
+    .then(
+      (res) => res[0]?.isAdmin === "ADMIN" || res[0]?.isAdmin === "SUPER ADMIN"
+    );
+};

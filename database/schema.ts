@@ -14,7 +14,7 @@ export const STATUS_ENUM = pgEnum("status", [
   "APPROVED",
   "REJECTED",
 ]);
-export const ROLE_ENUM = pgEnum("role", ["USER", "ADMIN"]);
+export const ROLE_ENUM = pgEnum("role", ["USER", "ADMIN", "SUPER ADMIN"]);
 export const ATTENDING_STATUS_ENUM = pgEnum("attending_status", [
   "ATTENDING",
   "NOT ATTENDING",

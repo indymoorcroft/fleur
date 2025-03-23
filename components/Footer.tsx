@@ -1,16 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
-import { db } from "@/database/drizzle";
-import { users } from "@/database/schema";
-import { eq } from "drizzle-orm";
+import { checkIsAdmin } from "@/lib/actions/auth";
 
 const Footer = async ({ userId }: any) => {
-  const isAdmin = await db
-    .select({ isAdmin: users.role })
-    .from(users)
-    .where(eq(users.id, userId))
-    .limit(1)
-    .then((res) => res[0]?.isAdmin === "ADMIN");
+  const isAdmin = await checkIsAdmin(userId);
 
   return (
     <footer className="border-t">

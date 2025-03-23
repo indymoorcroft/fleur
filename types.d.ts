@@ -20,6 +20,17 @@ interface AuthCredentials {
   password: string;
 }
 
+interface UserParams {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  role: string;
+  lastActivityDate: Date | null;
+  createdAt: Date | null;
+}
+
 interface EventParams {
   title: string;
   venue: string;

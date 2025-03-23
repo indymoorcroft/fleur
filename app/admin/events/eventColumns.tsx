@@ -12,11 +12,11 @@ import {
 import { deleteEvent } from "@/lib/admin/actions/event";
 import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
-import { Span } from "next/dist/trace";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { ArrowUpDown } from "lucide-react";
 
-export const columns: ColumnDef<Listing>[] = [
+export const eventColumns: ColumnDef<Listing>[] = [
   {
     accessorKey: "title",
     header: "Title",
@@ -62,11 +62,21 @@ export const columns: ColumnDef<Listing>[] = [
   },
   {
     accessorKey: "createdAt",
-    header: "Date Created",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Date Created
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
     cell: ({ row }) => {
       const date = new Date(row.getValue("createdAt"));
       const formatted = date.toLocaleDateString();
-      return <div>{formatted}</div>;
+      return <div className="ml-8">{formatted}</div>;
     },
   },
   {

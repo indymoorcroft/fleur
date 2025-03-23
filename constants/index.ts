@@ -14,16 +14,16 @@ export const adminSideBarLinks = [
     route: "/admin/events",
     text: "All Events",
   },
-  {
-    img: "/icons/admin/bookmark.svg",
-    route: "/admin/event-records",
-    text: "Event Records",
-  },
-  {
-    img: "/icons/admin/user.svg",
-    route: "/admin/account-requests",
-    text: "Account Requests",
-  },
+  // {
+  //   img: "/icons/admin/bookmark.svg",
+  //   route: "/admin/event-records",
+  //   text: "Event Records",
+  // },
+  // {
+  //   img: "/icons/admin/user.svg",
+  //   route: "/admin/account-requests",
+  //   text: "Account Requests",
+  // },
 ];
 
 export const FIELD_NAMES = {

@@ -14,17 +14,19 @@ const Sidebar = ({ session }: { session: Session }) => {
   return (
     <div className="sticky left-0 top-0 flex h-dvh flex-col justify-between bg-white px-5 pb-5 pt-10">
       <div>
-        <div className="flex flex-row items-center gap-2 border-b border-dashed border-primary-admin/20 pb-10 max-md:justify-center">
-          <Image
-            src="/icons/admin/logo.svg"
-            alt="logo"
-            width={37}
-            height={37}
-          />
-          <h1 className="font-rundeck-smooth text-2xl font-semibold tracking-tighter text-blue-950 max-md:hidden">
-            fleur
-          </h1>
-        </div>
+        <Link href="/">
+          <div className="flex flex-row items-center gap-2 border-b border-dashed border-primary-admin/20 pb-10 max-md:justify-center">
+            <Image
+              src="/icons/admin/logo.svg"
+              alt="logo"
+              width={37}
+              height={37}
+            />
+            <h1 className="font-rundeck-smooth text-2xl font-semibold tracking-tighter text-blue-950 max-md:hidden">
+              fleur
+            </h1>
+          </div>
+        </Link>
         <div className="mt-10 flex flex-col gap-5">
           {adminSideBarLinks.map((link) => {
             const isSelected =
@@ -70,7 +72,7 @@ const Sidebar = ({ session }: { session: Session }) => {
 
         <div className="flex flex-col max-md:hidden">
           <p className="font-semibold text-dark-200">{session?.user?.name}</p>
-          <p className="text-light-500 text-xs">{session?.user?.email}</p>
+          <p className="text-gray-700 text-xs">{session?.user?.email}</p>
         </div>
       </div>
     </div>

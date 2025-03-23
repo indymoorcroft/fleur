@@ -17,7 +17,7 @@ const Header = ({ session }: { session: Session }) => {
       </Link>
 
       <ul className="flex flex-row items-center gap-8">
-        <li>
+        {/* <li>
           <Link
             href="/events"
             className={cn(
@@ -27,11 +27,11 @@ const Header = ({ session }: { session: Session }) => {
           >
             Events
           </Link>
-        </li>
+        </li> */}
         <li>
           <Link href="/my-profile">
             <Avatar>
-              <AvatarFallback className="bg-amber-100">
+              <AvatarFallback className="bg-primary">
                 {getInitial(session?.user?.name || "PR")}
               </AvatarFallback>
             </Avatar>
