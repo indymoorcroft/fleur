@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌸 Fleur – Event Discovery & Booking App
 
-## Getting Started
+Hosted: https://fleur-indymoorcrofts-projects.vercel.app/
 
-First, run the development server:
+**login as SUPER ADMIN:**
+username: 1234@test.com
+password: password
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Access to admin site is in the Footer.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# About
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Fleur is a modern and intuitive event discovery and booking platform, allowing users to explore, book, and manage event tickets effortlessly.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Users are able to:
 
-## Learn More
+- Sign in/out of the platform
+- View a list of events
+- Select an event to view more information about it
+- Sign up for an event
+- Add an event to a digital calendar of their choice
+- View the events they have signed up for in their profile
 
-To learn more about Next.js, take a look at the following resources:
+In addition, Admins are able to:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Create, edit, and delete events
+- View all users
+- Make users Admins
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# 🛠️ Tech Stack
 
-## Deploy on Vercel
+- **Frontend**: Next.js (React) w/ Typescript & TailwindCSS
+- **Backend**: Drizzle
+- **Database**: Neon
+- **Deployment**: Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# 📦 Installation & Setup
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+To run the project locally:
+
+1. **Clone the Repository**
+
+   > git clone https://github.com/indymoorcroft/fleur.git
+   > cd fleur
+
+2. **Instel Dependencies**
+
+   > npm install
+
+3. **Start the Development Server**
+
+   > npm run dev
+
+4. **Open in Browser**
+   > http://localhost:3000
+
+# 📝 Roadmap & Future Improvements
+
+🏆 User authentication & profiles
+
+🛒 Integrated payment system for ticket purchases
+
+📢 Event notifications & reminders
+
+📊 Analytics dashboard for promoters
