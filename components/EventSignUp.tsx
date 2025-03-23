@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { Button } from "./ui/button";
 import { toast } from "sonner";
-import { eventSignUp, removeSignUp } from "@/lib/actions/event";
+import { eventSignUp, isSignedUp, removeSignUp } from "@/lib/actions/event";
+import { signUp } from "@/lib/actions/auth";
 
 interface Props {
   userId: string;
@@ -12,15 +13,17 @@ interface Props {
     available: boolean;
     message: string;
   };
+  signUpClicked: boolean;
 }
 
 const EventSignUp = ({
   userId,
   eventId,
   tickets: { available, message },
+  signUpClicked,
 }: Props) => {
   const [alterSignUp, setAlterSignUp] = useState(false);
-  const [signedUp, setSignedUp] = useState(false);
+  const [signedUp, setSignedUp] = useState(signUpClicked);
 
   const handleEventSignUp = async () => {
     if (!available) {

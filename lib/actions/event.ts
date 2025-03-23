@@ -147,3 +147,24 @@ export const getUserEvents = async (id: string | undefined) => {
     };
   }
 };
+
+export const isSignedUp = async (
+  userId: string | undefined,
+  eventId: string
+) => {
+  try {
+    if (!userId) throw new Error();
+
+    return await db
+      .select()
+      .from(userEventRecords)
+      .where(
+        and(
+          eq(userEventRecords.eventId, eventId),
+          eq(userEventRecords.userId, userId)
+        )
+      )
+      .limit(1)
+      .then((res) => (res[0] ? true : false));
+  } catch (error) {}
+};
